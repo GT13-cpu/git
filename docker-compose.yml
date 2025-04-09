@@ -6,5 +6,21 @@ services:
       dockerfile: web.dockerfile
     ports:
       - 80:80
+    #volumes:
+    #  - ./html:/usr/local/apache2/htdocs
+
+  db:
+    image: mariadb
+    restart: always
+    environment:
+      MARIADB_ROOT_PASSWORD: example
+      MARIADB_DATABASE: wordpress
     volumes:
-      - ./html:/usr/local/apache2/htdocs
+      - kit23dbdata:/var/lib/mysql
+  adminer:
+    image: adminer
+    restart: always
+    ports:
+      - 8080:8080
+volumes:
+  kit23dbdata:
